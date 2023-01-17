@@ -1,9 +1,17 @@
 <div class="d-flex">
   <div class="mx-4">
-    <button type="button" class="btn btn-light rounded-circle">
+    <button
+      (click)="prevMonth()"
+      type="button"
+      class="btn btn-light rounded-circle"
+    >
       <fa-icon [icon]="faAngleLeft"></fa-icon>
     </button>
-    <button type="button" class="btn btn-light rounded-circle">
+    <button
+      (click)="nextMonth()"
+      type="button"
+      class="btn btn-light rounded-circle"
+    >
       <fa-icon [icon]="faAngleRight"></fa-icon>
     </button>
   </div>

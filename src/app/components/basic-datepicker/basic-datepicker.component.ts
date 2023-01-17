@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   NgbCalendar,
+  NgbDate,
   NgbDatepicker,
   NgbDatepickerI18n,
   NgbDateStruct,
@@ -10,14 +11,41 @@ import {
   selector: 'app-basic-datepicker',
   templateUrl: './basic-datepicker.component.html',
   styleUrls: ['./basic-datepicker.component.css'],
+  styles: [
+    `
+      .ngb-dp-month-name {
+        background-color: red !important;
+      }
+    `,
+  ],
 })
-export class BasicDatepickerComponent {
-  model!: NgbDateStruct;
-  date!: { year: number; month: number };
+export class BasicDatepickerComponent implements OnInit {
+  @ViewChild(NgbDatepicker, { static: true }) datepicker!: NgbDatepicker;
 
-  constructor(private calendar: NgbCalendar) {}
+  date!: NgbDateStruct;
+
+  constructor(private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {}
+
+  ngOnInit(): void {
+    this.selectToday();
+  }
 
   selectToday() {
-    this.model = this.calendar.getToday();
+    this.date = this.calendar.getToday();
+    console.log(this.date);
+  }
+
+  nextMonth() {
+    const { state, calendar } = this.datepicker;
+    this.datepicker.navigateTo(calendar.getNext(state.firstDate, 'm', 1));
+  }
+
+  prevMonth() {
+    const { state, calendar } = this.datepicker;
+    this.datepicker.navigateTo(calendar.getNext(state.firstDate, 'm', -1));
+  }
+
+  onDateSelect(event: NgbDate) {
+    console.log(event);
   }
 }

@@ -1,5 +1,9 @@
 <ngb-datepicker
-  #dp
-  [(ngModel)]="model"
-  (navigate)="date = $event.next"
+  class="border-0"
+  navigation="none"
+  [showWeekNumbers]="false"
+  [(ngModel)]="date"
+  [weekdays]="false"
 ></ngb-datepicker>
+<button class="btn btn-primary" (click)="nextMonth()">next</button>
+<button class="btn btn-primary" (click)="prevMonth()">prev</button>
